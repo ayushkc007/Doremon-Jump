@@ -1,4 +1,4 @@
-import pygame
+import pygame, sys
 from pygame.locals import *
 #intialization of modules
 pygame.init()
@@ -51,6 +51,7 @@ def gameLoop(highscore):
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
+                sys.exit()
             if event.type==KEYDOWN:
                 if event.key==K_UP:
                     if doremony== 395:
