@@ -33,8 +33,12 @@ wall2=pygame.image.load("wall2.png")
 wall2=pygame.transform.scale(wall2,(75,130))
 wall3=pygame.image.load("wall3.png")
 wall3=pygame.transform.scale(wall3,(100,130))
+jumpSound=pygame.mixer.Sound("jumpSound.wav")
+gameoverSound=pygame.mixer.Sound("gameoverSound.wav")
+#music=pygame.mixer.music.load("music.mp3")
 highscore=0
 def gameLoop(highscore):
+    #pygame.mixer.music.play(-1)
     backx=0
     backy=0
     backvelocity= 0
@@ -57,15 +61,17 @@ def gameLoop(highscore):
             if event.type==KEYDOWN:
                 if event.key==K_UP:
                     if doremony== 395:
+                        jumpSound.play()
                         jump=True
-                        backvelocity =6
+                        backvelocity =5
                         game=True
                 if event.key==K_SPACE:
                     if game==False:
+                        gameoverSound.stop()
                         gameLoop(highscore)
-        if backx < -700:
+        if backx == -700:
             backx = 0 
-        if wallx < -1600:
+        if wallx == -1600:
             wallx=750
     #when jump
         if 396>doremony>200:
@@ -110,6 +116,7 @@ def gameLoop(highscore):
         screen.blit(background,[backx,backy])
         screen.blit(background,[backx + 700,backy])
         if gameover==True:
+            gameoverSound.play()
             screen.blit(end_text,[200,250])
         screen.blit(walk[walkpoint],[doremonx,doremony])
         
