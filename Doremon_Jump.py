@@ -2,13 +2,15 @@ import pygame, sys
 from pygame.locals import *
 #intialization of modules
 pygame.init()
+#font
+font=pygame.font.Font("freesansbold.ttf",20)
 #setting screen size for the game
 screen=pygame.display.set_mode((700,500))
 #(width,height)
 pygame.display.set_caption("Doremon Jump")
-#font
-font=pygame.font.Font("freesansbold.ttf",20)
+
 #color
+
 white = (135,206,235)
 black=(0,0,0)
 doremon=pygame.image.load("obj1.png")
