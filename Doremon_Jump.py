@@ -31,7 +31,8 @@ wall2=pygame.image.load("wall2.png")
 wall2=pygame.transform.scale(wall2,(75,130))
 wall3=pygame.image.load("wall3.png")
 wall3=pygame.transform.scale(wall3,(100,130))
-def gameLoop():
+highscore=0
+def gameLoop(highscore):
     backx=0
     backy=0
     backvelocity= 0
@@ -57,7 +58,8 @@ def gameLoop():
                         backvelocity =6
                         game=True
                 if event.key==K_SPACE:
-                    gameLoop()
+                    if game==False:
+                        gameLoop(highscore)
         if backx < -700:
             backx = 0 
         if wallx < -1600:
@@ -72,17 +74,17 @@ def gameLoop():
             if jump==False:
                 doremony+=gravity  
     #colllision
-        if wallx<doremonx+100<wallx+70 and wally<doremony+50<wally+130:
+        if wallx<doremonx+100<wallx+50 and wally<doremony+50<wally+130:
             backvelocity=0   
             walkpoint=0
             game=False
             gameover=True
-        if wallx+400<doremonx+100<wallx+470 and wally<doremony+50<wally+130:
+        if wallx+400<doremonx+100<wallx+475 and wally<doremony+50<wally+130:
             backvelocity=0   
             walkpoint=0 
             game=False
             gameover=True
-        if wallx+800<doremonx+100<wallx+870 and wally<doremony+50<wally+130:
+        if wallx+800<doremonx+100<wallx+900 and wally<doremony+50<wally+130:
             backvelocity=0   
             walkpoint=0 
             game=False
@@ -94,12 +96,14 @@ def gameLoop():
             gameover=True
         if game==True:
             score+=1
-         
-        text=font.render("Score: "+str(score),True,black)  
+            if(highscore<score):
+                highscore=score
+        text=font.render("SCORE: "+str(score),True,black)  
         end_text=font.render("Game Over. Press space to continue",True,black)
+        high_text=font.render("HIGH SCORE: "+str(highscore),True,black)
         screen.fill(white)
-        screen.blit(text,[300,10])
-    
+        screen.blit(text,[400,10])
+        screen.blit(high_text,[10,10])
         screen.blit(background,[backx,backy])
         screen.blit(background,[backx + 700,backy])
         if gameover==True:
@@ -118,4 +122,4 @@ def gameLoop():
         screen.blit(wall3,[wallx+800,wally])
         screen.blit(wall2,[wallx+1200,wally])
         pygame.display.update()
-gameLoop()       
+gameLoop(highscore)       
