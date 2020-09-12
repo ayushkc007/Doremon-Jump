@@ -44,6 +44,7 @@ gameoverSound=pygame.mixer.Sound("gameoverSound.wav")
 #variables to send as arguement
 volume=True
 highscore=0
+
 def gameLoop(highscore,volume):
     #pygame.mixer.music.play(-1)
     backx=0
@@ -59,7 +60,10 @@ def gameLoop(highscore,volume):
     gravity=7
     game=False
     gameover=False
+    FRAMERATE=60
+    clock=pygame.time.Clock()
     while True:
+        clock.tick(FRAMERATE)
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
